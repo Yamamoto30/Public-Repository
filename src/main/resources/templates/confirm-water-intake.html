@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>水分摂取記録確認</title>
+<link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+		
+	<h2>水分摂取記録確認</h2>
+
+	<div th:object="${waterIntakeForm}">
+		【利用者ID】<br>
+	   	<p th:text="*{userId}"></p><br><br>
+	   	【摂取日】<br>
+	   	<p th:text="*{intakeDate}"></p><br><br>
+	   	【摂取量（ml)】<br>
+	   	<p th:text="*{amount}"></p><br><br>
+	</div>
+
+     <form th:action="@{/confirm-water-intake}" method="POST"
+			th:object="${waterIntakeForm}">
+    	<input type="hidden" th:field="*{userId}">
+    	<input type="hidden" th:field="*{intakeDate}">
+    	<input type="hidden" th:field="*{amount}">
+    	<input type="submit" value="登録実行" class="btn">
+   	</form>
+
+    <form th:action="@{/show-water-form-ret}" method="POST"
+			th:object="${waterIntakeForm}">
+    	<input type="hidden" th:field="*{userId}">
+    	<input type="hidden" th:field="*{intakeDate}">
+    	<input type="hidden" th:field="*{amount}">
+    	<input type="submit" value="もどる" class="btn">
+   	</form>
+
+</body>
+</html>
