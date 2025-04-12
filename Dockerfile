@@ -7,6 +7,8 @@ WORKDIR /app
 # Maven Wrapper など含めた全ファイルをコピー
 COPY . .
 
+EXPOSE 8080
+
 # Maven Wrapper で依存関係をダウンロードし、アプリをビルド
 RUN ./mvnw clean package -DskipTests
 
