@@ -11,6 +11,9 @@ import lombok.Data;
 
 @Data
 public class WaterIntakeForm {
+	
+	// ←★ 追加！編集時に必要
+    private Long id;
 
 	@NotNull(message="ユーザーIDを入力してください。")
 	@Size(min=4, max=16, message="4文字から16文字で指定してください。")
