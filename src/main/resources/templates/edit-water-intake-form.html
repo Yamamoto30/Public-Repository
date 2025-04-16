@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>水分摂取量 編集</title>
+    <style>
+        form {
+            width: 400px;
+            margin: 50px auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input, button {
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h2 style="text-align: center;">水分摂取量 編集</h2>
+
+    <form th:action="@{/update-water-intake}" th:object="${form}" method="post">
+        <!-- IDはhiddenで送信 -->
+        <input type="hidden" th:field="*{id}" />
+
+        <label>ユーザーID:</label>
+        <input type="text" th:field="*{userId}" required />
+
+        <label>摂取日:</label>
+        <input type="date" th:field="*{intakeDate}" required />
+
+        <label>摂取量（ml）:</label>
+        <input type="number" th:field="*{amount}" required />
+
+        <button type="submit">更新</button>
+    </form>
+
+    <div style="text-align: center; margin-top: 20px;">
+        <a th:href="@{/water-intake-list}">一覧に戻る</a>
+    </div>
+</body>
+</html>
