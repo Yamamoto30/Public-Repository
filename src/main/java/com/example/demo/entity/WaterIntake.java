@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 public class WaterIntake {
-
+    private Long id;  //主キーとなるIDフィールド
 	private String userId;
 	private Date intakeDate;
 	private Integer amount;
