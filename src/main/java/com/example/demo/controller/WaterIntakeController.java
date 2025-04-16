@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -7,6 +9,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.entity.WaterIntake;
 import com.example.demo.form.WaterIntakeForm;
@@ -69,4 +72,59 @@ public class WaterIntakeController {
 
         return "complete-water-intake";
     }
+    
+        // ⭐ 一覧表示
+        @GetMapping("/water-intake-list")
+        public String showWaterIntakeList(Model model) {
+        List<WaterIntake> waterIntakeList = service.getAllWaterIntakes();
+        model.addAttribute("waterIntakeList", waterIntakeList);
+        return "water-intake-list";
+    }
+
+        // ⭐ 削除処理
+        @PostMapping("/delete-water-intake")
+        public String deleteWaterIntake(@RequestParam("id") Long id, Model model) {
+        service.delete(id);
+        model.addAttribute("msg","選択した水分摂取データを削除しました。");
+        return "redirect:/water-intake-list";
+        }
+        
+     // 編集画面の表示
+        @GetMapping("/edit-water-intake")
+        public String showEditForm(@RequestParam("id") Long id, Model model) {
+            WaterIntake intake = service.findById(id);
+
+            // フォームに変換（編集画面でもWaterIntakeFormを使う場合）
+            WaterIntakeForm form = new WaterIntakeForm();
+            form.setId(intake.getId());
+            form.setUserId(intake.getUserId());
+            form.setIntakeDate(intake.getIntakeDate());
+            form.setAmount(intake.getAmount());
+
+            model.addAttribute("form", form);
+            return "edit-water-intake-form";
+        }
+
+        // 編集内容の更新
+        @PostMapping("/update-water-intake")
+        public String updateWaterIntake(
+                @Validated @ModelAttribute("form") WaterIntakeForm form,
+                BindingResult result,
+                Model model) {
+
+            if (result.hasErrors()) {
+                return "edit-water-intake-form";
+            }
+
+            WaterIntake intake = new WaterIntake();
+            intake.setId(form.getId());
+            intake.setUserId(form.getUserId());
+            intake.setIntakeDate(form.getIntakeDate());
+            intake.setAmount(form.getAmount());
+
+            service.update(intake);
+            model.addAttribute("msg", "水分摂取データを更新しました。");
+            return "redirect:/water-intake-list";
+        }
+
 }
