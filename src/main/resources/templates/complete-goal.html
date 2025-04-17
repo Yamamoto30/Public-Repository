@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>目標設定 完了</title>
+    <style>
+        .container {
+            text-align: center;
+            margin-top: 50px;
+        }
+        .message {
+            color: green;
+            font-size: 18px;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #337ab7;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>目標設定 完了</h2>
+        <p class="message" th:text="${msg}"></p>
+
+        <a th:href="@{/show-goal-form}">再度設定する</a>
+    </div>
+</body>
+</html>
