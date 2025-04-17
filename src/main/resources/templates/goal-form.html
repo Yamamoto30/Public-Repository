@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>目標設定</title>
+    <style>
+        form {
+            width: 300px;
+            margin: 40px auto;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+        }
+        .error {
+            color: red;
+            font-size: 0.9em;
+        }
+        button {
+            margin-top: 15px;
+            padding: 8px 16px;
+        }
+    </style>
+</head>
+<body>
+    <h2 style="text-align:center;">目標摂取量の設定</h2>
+
+    <form th:action="@{/confirm-goal}" th:object="${goalForm}" method="post">
+        <label>ユーザーID:</label>
+        <input type="text" th:field="*{userId}" />
+        <div class="error" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></div>
+
+        <label>目標摂取量 (ml):</label>
+        <input type="number" th:field="*{targetAmount}" />
+        <div class="error" th:if="${#fields.hasErrors('targetAmount')}" th:errors="*{targetAmount}"></div>
+
+        <button type="submit">確認画面へ</button>
+    </form>
+
+    <div style="text-align:center; margin-top: 20px;">
+        <a th:href="@{/}">ホームに戻る</a>
+    </div>
+</body>
+</html>
