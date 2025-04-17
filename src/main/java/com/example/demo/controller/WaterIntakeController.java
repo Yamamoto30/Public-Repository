@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demo.entity.Goal;
 import com.example.demo.entity.WaterIntake;
 import com.example.demo.form.WaterIntakeForm;
+import com.example.demo.service.GoalService;
 import com.example.demo.service.WaterIntakeService;
 
 import lombok.RequiredArgsConstructor;
@@ -22,6 +24,7 @@ import lombok.RequiredArgsConstructor;
 public class WaterIntakeController {
 
     private final WaterIntakeService service;
+    private final GoalService goalService; 
 
     /*--- 水分摂取入力画面の表示 ---*/
     @GetMapping("/show-water-form")
@@ -78,6 +81,15 @@ public class WaterIntakeController {
         public String showWaterIntakeList(Model model) {
         List<WaterIntake> waterIntakeList = service.getAllWaterIntakes();
         model.addAttribute("waterIntakeList", waterIntakeList);
+        
+     // ここでは仮に「yamamoto」ユーザーの目標を取得
+        Goal goal = goalService.getGoalByUserId("yamamoto"); // ログイン機能があればそこから取得
+
+        if (goal != null) {
+            model.addAttribute("goalAmount", goal.getTargetAmount());
+        } else {
+            model.addAttribute("goalAmount", "未設定");
+        }
         return "water-intake-list";
     }
 
