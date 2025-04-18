@@ -47,4 +47,19 @@ public class WaterIntakeRepositoryImpl implements WaterIntakeRepository {
         System.out.println("---ID検索 ID:" + id + "---");
         return Optional.ofNullable(store.get(id));
     }
+    
+    @Override
+    public List<WaterIntake> findByUserId(String userId) {
+        System.out.println("---ユーザーID検索 userId:" + userId + "---");
+        
+        // userId でフィルタリング
+        List<WaterIntake> result = new ArrayList<>();
+        for (WaterIntake intake : store.values()) {
+            if (intake.getUserId().equals(userId)) {
+                result.add(intake);
+            }
+        }
+        return result;
+    }
+
 }
