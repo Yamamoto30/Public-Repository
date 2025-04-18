@@ -27,7 +27,7 @@ public class LoginController {
     public String login(@ModelAttribute LoginForm form, Model model, HttpSession session) {
         String password = UserRepository.findPassword(form.getUserId());
         if (password != null && password.equals(form.getPassword())) {
-            session.setAttribute("loginUser", form.getUserId());
+            session.setAttribute("loginUserId", form.getUserId());
             return "redirect:/home";
         } else {
             model.addAttribute("loginForm", form);
