@@ -10,6 +10,7 @@ public interface WaterIntakeService {
 	
 	//全ての水分摂取データを取得
     List<WaterIntake> getAllWaterIntakes();
+    List<WaterIntake> getWaterIntakesByUserId(String userId);
     
     //指定されたIDの水分摂取データを削除
     void delete(Long id);
