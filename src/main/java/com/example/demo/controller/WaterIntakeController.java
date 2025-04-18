@@ -17,6 +17,7 @@ import com.example.demo.form.WaterIntakeForm;
 import com.example.demo.service.GoalService;
 import com.example.demo.service.WaterIntakeService;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -76,20 +77,21 @@ public class WaterIntakeController {
         return "complete-water-intake";
     }
     
-        // ⭐ 一覧表示
-        @GetMapping("/water-intake-list")
-        public String showWaterIntakeList(Model model) {
-        List<WaterIntake> waterIntakeList = service.getAllWaterIntakes();
-        model.addAttribute("waterIntakeList", waterIntakeList);
-        
-     // ここでは仮に「yamamoto」ユーザーの目標を取得
-        Goal goal = goalService.getGoalByUserId("yamamoto"); // ログイン機能があればそこから取得
+ // 一覧表示
+    @GetMapping("/water-intake-list")
+    public String showWaterIntakeList(Model model, HttpSession session) {
+        String loginUser = (String) session.getAttribute("loginUser");
 
+        List<WaterIntake> waterIntakeList = service.getWaterIntakesByUserId(loginUser);
+        model.addAttribute("waterIntakeList", waterIntakeList);
+
+        Goal goal = goalService.getGoalByUserId(loginUser);
         if (goal != null) {
             model.addAttribute("goalAmount", goal.getTargetAmount());
         } else {
             model.addAttribute("goalAmount", "未設定");
         }
+
         return "water-intake-list";
     }
 
