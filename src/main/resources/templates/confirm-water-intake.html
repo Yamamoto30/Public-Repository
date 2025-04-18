@@ -10,8 +10,7 @@
 	<h2>水分摂取記録確認</h2>
 
 	<div th:object="${waterIntakeForm}">
-		【利用者ID】<br>
-	   	<p th:text="*{userId}"></p><br><br>
+		
 	   	【摂取日】<br>
 	   	<p th:text="*{intakeDate}"></p><br><br>
 	   	【摂取量（ml)】<br>
@@ -20,7 +19,7 @@
 
      <form th:action="@{/confirm-water-intake}" method="POST"
 			th:object="${waterIntakeForm}">
-    	<input type="hidden" th:field="*{userId}">
+    	
     	<input type="hidden" th:field="*{intakeDate}">
     	<input type="hidden" th:field="*{amount}">
     	<input type="submit" value="登録実行" class="btn">
