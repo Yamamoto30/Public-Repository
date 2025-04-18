@@ -9,6 +9,7 @@
             margin: 20px;
             text-align: center;
         }
+      
         h1 {
             color: #333;
         }
@@ -43,5 +44,10 @@
         <a th:href="@{/water-intake-list}" class="menu-item">水分摂取履歴を見る</a>
         <a th:href="@{/show-goal-form}" class="menu-item">目標摂取量を設定する</a>
     </div>
+    
+    <!-- ログアウトボタン -->
+    <form action="#" th:action="@{/logout}" method="post">
+        <button type="submit" class="logout-btn">ログアウト</button>
+    </form>
 </body>
 </html>
