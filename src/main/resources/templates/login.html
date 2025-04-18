@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ログイン</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .form-container {
+            display: inline-block;
+            padding: 30px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+        input {
+            display: block;
+            margin: 10px auto;
+            padding: 10px;
+            width: 80%;
+        }
+        .error {
+            color: red;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 30px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        .back-link {
+            margin-top: 10px;
+            display: inline-block;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <h1>ログイン</h1>
+    
+    <div class="form-container">
+        <form th:action="@{/login}" method="post" th:object="${loginForm}">
+            <div class="error" th:if="${error}" th:text="${error}"></div>
+            <input type="text" th:field="*{userId}" placeholder="ユーザーID" required />
+            <input type="password" th:field="*{password}" placeholder="パスワード" required />
+            <button type="submit">ログイン</button>
+        </form>
+
+        <div>
+            <a th:href="@{/register}" class="back-link">新規登録はこちら</a>
+        </div>
+    </div>
+</body>
+</html>
