@@ -6,10 +6,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.entity.Goal;
 
+@Primary
 @Repository
 public class GoalRepositoryImpl implements GoalRepository {
     // メモリ内データストア（実際のアプリではデータベースを使用）
