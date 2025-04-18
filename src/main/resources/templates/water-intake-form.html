@@ -7,25 +7,26 @@
 </head>
 <body>
 
-	<h2>水分摂取記録</h2>
+<h2>水分摂取記録</h2>
 
-    <form th:action="@{/water-intake-form}" method="POST" 
-    		th:object="${waterIntakeForm}">
-    	【利用者ID】<br>
-    	<input type="text" th:field="*{userId}"><br>
-    	<div th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}" class="error-msg"></div>
-		<br>
-    	【摂取日】<br>
-    	<input type="date" th:field="*{intakeDate}"><br>
-    	<div th:if="${#fields.hasErrors('intakeDate')}" th:errors="*{intakeDate}" class="error-msg"></div>
-		<br>
-    	【摂取量】(ml)<br>
-		<input type="text" th:field="*{amount}"><br>
-    	<div th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}" class="error-msg"></div>
-		<br>
-    	
-    	<input type="submit" value="登録" class="btn">
-    </form>
+<form th:action="@{/water-intake-form}" method="POST"
+th:object="${waterIntakeForm}">
+<!-- ユーザーIDを非表示フィールドに変更 -->
+<input type="hidden" th:field="*{userId}">
+<!-- エラーメッセージは残しておく -->
+<div th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}" class="error-msg"></div>
+
+【摂取日】<br>
+<input type="date" th:field="*{intakeDate}"><br>
+<div th:if="${#fields.hasErrors('intakeDate')}" th:errors="*{intakeDate}" class="error-msg"></div>
+<br>
+【摂取量】(ml)<br>
+<input type="text" th:field="*{amount}"><br>
+<div th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}" class="error-msg"></div>
+<br>
+
+<input type="submit" value="登録" class="btn">
+</form>
 
 </body>
 </html>
