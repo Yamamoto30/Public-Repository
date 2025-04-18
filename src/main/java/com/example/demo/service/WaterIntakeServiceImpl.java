@@ -24,6 +24,11 @@ public class WaterIntakeServiceImpl implements WaterIntakeService {
     public List<WaterIntake> getAllWaterIntakes() {
         return repository.findAll();
     }
+	
+	@Override
+    public List<WaterIntake> getWaterIntakesByUserId(String userId) {
+        return repository.findByUserId(userId);
+	}
 
     @Override
     public void delete(Long id) {
@@ -41,5 +46,3 @@ public class WaterIntakeServiceImpl implements WaterIntakeService {
     }
 
 }
-
-
