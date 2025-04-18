@@ -1,78 +1,75 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>水分摂取一覧</title>
-    <style>
-        table {
-            border-collapse: collapse;
-            width: 80%;
-            margin: 20px auto;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        .action-buttons {
-            display: flex;
-            gap: 10px;
-        }
-        .message {
-            color: green;
-            text-align: center;
-        }
-    </style>
+<meta charset="UTF-8">
+<title>水分摂取一覧</title>
+<style>
+table {
+border-collapse: collapse;
+width: 80%;
+margin: 20px auto;
+}
+th, td {
+border: 1px solid #ddd;
+padding: 8px;
+text-align: left;
+}
+th {
+background-color: #f2f2f2;
+}
+.action-buttons {
+display: flex;
+gap: 10px;
+}
+.message {
+color: green;
+text-align: center;
+}
+</style>
 </head>
 <body>
-    <h1>水分摂取一覧</h1>
-    
-    <div th:if="${msg}" class="message" th:text="${msg}"></div>
-    
-    <!-- 目標の表示 -->
-    <div class="goal-section">
-        <p>現在の目標: <span th:text="${goalAmount}">未設定</span> ml</p>
-    </div>
-    
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>ユーザーID</th>
-                <th>摂取日</th>
-                <th>摂取量 (ml)</th>
-                <th>操作</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="intake : ${waterIntakeList}">
-                <td th:text="${intake.id}"></td>
-                <td th:text="${intake.userId}"></td>
-                <td th:text="${#dates.format(intake.intakeDate, 'yyyy-MM-dd')}"></td>
-                <td th:text="${intake.amount}"></td>
-                <td>
-                    <td>
-    <div class="action-buttons">
-        <form th:action="@{/delete-water-intake}" method="post" style="display:inline;">
-            <input type="hidden" name="id" th:value="${intake.id}" />
-            <button type="submit" onclick="return confirm('本当に削除しますか？');">削除</button>
-        </form>
+<h1>水分摂取一覧</h1>
 
-        <a th:href="@{/edit-water-intake(id=${intake.id})}">編集</a>
-    </div>
+<div th:if="${msg}" class="message" th:text="${msg}"></div>
+
+<!-- 目標の表示 -->
+<div class="goal-section">
+<p>現在の目標: <span th:text="${goalAmount}">未設定</span> ml</p>
+</div>
+
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<!-- ユーザーIDの列を削除 -->
+<th>摂取日</th>
+<th>摂取量 (ml)</th>
+<th>操作</th>
+</tr>
+</thead>
+<tbody>
+<tr th:each="intake : ${waterIntakeList}">
+<td th:text="${intake.id}"></td>
+<!-- ユーザーIDの表示を削除 -->
+<td th:text="${#dates.format(intake.intakeDate, 'yyyy-MM-dd')}"></td>
+<td th:text="${intake.amount}"></td>
+<td>
+<div class="action-buttons">
+<form th:action="@{/delete-water-intake}" method="post" style="display:inline;">
+<input type="hidden" name="id" th:value="${intake.id}" />
+<button type="submit" onclick="return confirm('本当に削除しますか？');">削除</button>
+</form>
+
+<a th:href="@{/edit-water-intake(id=${intake.id})}">編集</a>
+</div>
 </td>
+</tr>
+</tbody>
+</table>
 
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    
-    <div style="text-align: center; margin-top: 20px;">
-        <a th:href="@{/show-water-form}">新規登録</a>
-        <a th:href="@{/show-goal-form}">目標を設定する</a>
-    </div>
+<div style="text-align: center; margin-top: 20px;">
+<a th:href="@{/show-water-form}">新規登録</a>
+<a th:href="@{/show-goal-form}">目標を設定する</a>
+</div>
 </body>
 </html>
