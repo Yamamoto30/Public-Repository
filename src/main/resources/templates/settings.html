@@ -1,0 +1,28 @@
+<!-- settings.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>設定 - ユーザーID/パスワード変更</title>
+</head>
+<body>
+    <h2>ユーザーID/パスワード変更</h2>
+    <form method="post" th:action="@{/settings}">
+        <label>現在のパスワード:</label>
+        <input type="password" name="oldPassword" required><br><b
+        
+        <label>新しいユーザーID:</label>
+        <input type="text" name="newUserId" required><br><br>
+       
+        <label>新しいパスワード:</label>
+        <input type="password" name="newPassword" required><br><br>
+
+        <button type="submit">変更</button>
+    </form>
+
+    <p th:if="${message}" th:text="${message}" style="color: green;"></p>
+    <p th:if="${error}" th:text="${error}" style="color: red;"></p>
+
+    <br>
+    <a th:href="@{/home}">← ホームに戻る</a>
+</body>
+</html>
